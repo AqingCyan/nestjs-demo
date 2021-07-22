@@ -5,18 +5,14 @@ import {
   Post,
   Body,
   UsePipes,
-  ValidationPipe, ParseIntPipe
-  // HttpException,
-  // HttpStatus,
-  // ForbiddenException,
-  // UseFilters,
-} from "@nestjs/common";
+  ValidationPipe,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { CreatePostDto } from './post.dto';
 import { DemoService } from './providers/demo/demo.service';
-// import { DemoFilter } from '../../core/filters/demo.filter';
+import { Roles } from '../../core/decorator/roles.decorator';
 
 @Controller('posts')
-// @UseFilters(DemoFilter)
 export class PostsController {
   constructor(private readonly demoService: DemoService) {}
 
@@ -35,11 +31,9 @@ export class PostsController {
   }
 
   @Post()
-  // @UseFilters(DemoFilter)
   @UsePipes(ValidationPipe)
+  @Roles('member')
   store(@Body() post: CreatePostDto) {
     this.demoService.create(post);
-    // throw new HttpException('没有权限', HttpStatus.FORBIDDEN);
-    // throw new ForbiddenException('没有权限');
   }
 }
