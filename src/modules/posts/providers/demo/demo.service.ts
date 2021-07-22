@@ -1,0 +1,16 @@
+import { Injectable } from '@nestjs/common';
+import { Post } from 'src/modules/posts/interfaces/post.interface';
+
+// 数据库的变动在这里变得很合理
+@Injectable()
+export class DemoService {
+  private readonly posts: Post[] = [];
+
+  findAll(): Post[] {
+    return this.posts;
+  }
+
+  create(post: Post) {
+    this.posts.push(post);
+  }
+}
