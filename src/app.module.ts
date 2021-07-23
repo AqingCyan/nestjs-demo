@@ -18,7 +18,7 @@ import { LoggingInterceptor } from './core/interceptors/logging.interceptor';
     },
     {
       provide: APP_INTERCEPTOR,
-      useClass: LoggingInterceptor,
+      useClass: LoggingInterceptor, // 全局拦截器
     },
   ],
 })
